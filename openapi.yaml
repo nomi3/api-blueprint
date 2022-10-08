@@ -5,15 +5,13 @@ info:
   version: "1.0.0"
 
 paths:
-  "/message":
-    get:
-      summary: "Sample Api get operation."
-      description: "Sample Api get operation."
-      responses:
-        "200":
-          description: "Success operation."
-          content:
-            application/json:
-              schema:
-                type: string
-                example: "Hello World !"
+  {}
+
+components:
+  schemas:
+    SampleInt32:
+      type: integer
+      format: int32
+    SampleDateString:
+      type: string
+      format: date
