@@ -30,10 +30,7 @@ tags:
 paths:
   "/shops/{shopId}/reviews":
     parameters:
-    - name: shopId
-      in: path
-      required: true
-      schema: {type: string}
+      - $ref: "#components/parameters/ShopId"
     get:
       summary: "Get shop reviews"
       description: "(desc) Get shop reviews"
@@ -42,6 +39,12 @@ paths:
       responses:
         "200":
           description: "Succcess"
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Review"
     post:
       summary: "Create review"
       tags: ["reviews"]
@@ -63,10 +66,8 @@ paths:
         content:
           application/json:
             schema:
-              type: object
-              properties:
-                score: {type: integer, example: 3}
-                comment: {type: string, example: "delicious"}
+              $ref: "#/components/schemas/Review"
+
       responses:
         "201":
           description: "Succcess"
@@ -75,27 +76,44 @@ paths:
               description: "New URL of created review"
               schema: {type: string, format: url}
         "400":
-          description: "Client side error"
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  code: {type: string}
-                  type: {type: string}
-                  message: {type: string}
-                  errors:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        field: {type: string}
-                        code: {type: string}
+          $ref: "#/components/responses/400-BadRequest"
 
 
 
 components:
+  responses:
+    400-BadRequest:
+      description: "Client side error"
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ClientError"
+
+  parameters:
+    ShopId:
+      name: shopId
+      in: path
+      required: true
+      schema: {type: string}
   schemas:
+    ClientError:
+      type: object
+      properties:
+        code: {type: string}
+        type: {type: string}
+        message: {type: string}
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field: {type: string}
+              code: {type: string}
+    Review:
+      type: object
+      properties:
+        score: {type: integer, example: 3}
+        comment: {type: string, example: "delicious"}
     SampleInt:
       type: integer
       minimum: 0
