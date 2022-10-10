@@ -37,6 +37,31 @@ paths:
       responses:
         "200":
           description: "Succcess"
+    post:
+      summary: "Create review"
+      tags: ["shops"]
+      deprecated: false
+      parameters:
+        - name: shopId
+          in: path
+          required: true
+          schema: {type: string}
+          example: "abcdefg"
+        - name: X-Api-Key
+          in: header
+          description: "request user's identifier"
+          schema: {type: string}
+          example: "XXXX-XXXX-XXXX-XXXX"
+        - name: token
+          in: cookie
+          description: "One time token"
+          schema: {type: string}
+          example: "XXXX-XXXX-XXXX-XXXX"
+      responses:
+        "201":
+          description: "Succcess"
+
+
 
 components:
   schemas:
