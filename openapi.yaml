@@ -57,6 +57,16 @@ paths:
           description: "One time token"
           schema: {type: string}
           example: "XXXX-XXXX-XXXX-XXXX"
+      requestBody:
+        description: "contents of review"
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                score: {type: integer, example: 3}
+                comment: {type: string, example: "delicious"}
       responses:
         "201":
           description: "Succcess"
