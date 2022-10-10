@@ -22,31 +22,31 @@ servers:
     description: "Staging"
   - url: "https://api.test.com"
     description: "Production"
+
+tags:
+  - name: "reviews"
+    description: "review description"
+
 paths:
   "/shops/{shopId}/reviews":
+    parameters:
+    - name: shopId
+      in: path
+      required: true
+      schema: {type: string}
     get:
       summary: "Get shop reviews"
       description: "(desc) Get shop reviews"
-      tags: ["shops"]
+      tags: ["reviews"]
       deprecated: false
-      parameters:
-        - name: shopId
-          in: path
-          required: true
-          schema: {type: string}
       responses:
         "200":
           description: "Succcess"
     post:
       summary: "Create review"
-      tags: ["shops"]
+      tags: ["reviews"]
       deprecated: false
       parameters:
-        - name: shopId
-          in: path
-          required: true
-          schema: {type: string}
-          example: "abcdefg"
         - name: X-Api-Key
           in: header
           description: "request user's identifier"
