@@ -45,6 +45,7 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Review"
+      security: []
     post:
       summary: "Create review"
       tags: ["reviews"]
@@ -78,9 +79,18 @@ paths:
         "400":
           $ref: "#/components/responses/400-BadRequest"
 
+security:
+  - apikey_auth: []
+
 
 
 components:
+  securitySchemes:
+    apikey_auth:
+      description: "API key authorization"
+      type: apiKey
+      in: header
+      name: "X-Api-Key"
   responses:
     400-BadRequest:
       description: "Client side error"
