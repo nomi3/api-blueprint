@@ -23,7 +23,20 @@ servers:
   - url: "https://api.test.com"
     description: "Production"
 paths:
-  {}
+  "/shops/{shopId}/reviews":
+    get:
+      summary: "Get shop reviews"
+      description: "(desc) Get shop reviews"
+      tags: ["shops"]
+      deprecated: false
+      parameters:
+        - name: shopId
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200":
+          description: "Succcess"
 
 components:
   schemas:
